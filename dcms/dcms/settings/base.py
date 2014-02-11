@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__ + '/../'))
+from unipath import Path
+BASE_DIR = Path(__file__).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cms',
@@ -79,7 +81,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_DIRS = (
     # The docs say it should be absolute path: BASE_DIR is precisely one.
     # Life is wonderful!
-    os.path.join(BASE_DIR, "templates"),
+    BASE_DIR.child("templates"),
 )
 
 ROOT_URLCONF = 'dcms.urls'
@@ -119,8 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = BASE_DIR.child("static")
+MEDIA_ROOT = BASE_DIR.child("media")
 
 CMS_TEMPLATES = (
     ('template_1.html', 'Template One'),
@@ -129,3 +131,5 @@ CMS_TEMPLATES = (
 LANGUAGES = [
     ('en', 'English'),
 ]
+
+SITE_ID = 1
